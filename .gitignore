@@ -3,4 +3,6 @@
 Temp/
 **/Sistemas/*.zip
 **/Sistemas/*.ASV
+**/Sistemas/*.sm2
+**/Paneles/*.vtp.ASV
 *.ush
