@@ -1,0 +1,156 @@
+/*
+Dealer Name: TRISON Europe
+System Name: TRISON MODULES
+System Number:
+Programmer: Carlos Soto Pedreira - carlos.soto@trisonworld.com
+Comments: Module which manage multilanguage labels for UIs.
+*/
+                 
+
+/************************** Compiler directives **************************/
+
+#ENABLE_DYNAMIC
+#SYMBOL_NAME "TouchPanel - Multilanguage Labels"
+#CATEGORY "46" "TRISON - UI" 
+#PRINT_TO_TRACE
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#ENCODING_UTF16
+                           
+
+/************************** Constants **************************/
+
+#DEFINE_CONSTANT PANEL_COUNT 	2 //Modify as UIs required
+#DEFINE_CONSTANT LANG_COUNT 	3 //Modify as langs required
+#DEFINE_CONSTANT LABEL_LENGTH 100
+#DEFINE_CONSTANT SPANISH 			1
+#DEFINE_CONSTANT ENGLISH 			2
+#DEFINE_CONSTANT GERMAN 			3
+// Add or modify based on your language requirements
+                                                                           
+
+/************************** Inputs and Outputs **************************/    
+
+ANALOG_INPUT 	LangSelection_TP[PANEL_COUNT];
+
+STRING_OUTPUT 	HOME$[PANEL_COUNT], 					_SKIP_, 		AUDIO$[PANEL_COUNT], 					_SKIP_, 
+								VIDEO$[PANEL_COUNT], 					_SKIP_,			CAM$[PANEL_COUNT], 						_SKIP_, 
+								PROJECTION$[PANEL_COUNT],			_SKIP_, 		LIGHT$[PANEL_COUNT], 					_SKIP_, 
+								ADVANCED$[PANEL_COUNT], 			_SKIP_,			BACK$[PANEL_COUNT], 					_SKIP_, 
+								HOLD_START$[PANEL_COUNT], 		_SKIP_, 		SHUTDOWN$[PANEL_COUNT], 			_SKIP_, 
+								CANCEL$[PANEL_COUNT], 				_SKIP_, 		CONFIRM$[PANEL_COUNT], 				_SKIP_, 
+								WAIT_LOADING$[PANEL_COUNT], 	_SKIP_, 		LOADING$[PANEL_COUNT], 				_SKIP_, 
+								WAIT_SHUTDOWN$[PANEL_COUNT], 	_SKIP_, 		SHUTTING_DOWN$[PANEL_COUNT], 	_SKIP_, 
+								LOG$[PANEL_COUNT]; 						//Modify as needed
+                             
+
+/************************** Structures **************************/
+
+STRUCTURE TranslationLabels
+{
+	STRING 	Home[LABEL_LENGTH], 					Audio[LABEL_LENGTH], 					Video[LABEL_LENGTH], 					Cam[LABEL_LENGTH], 
+					Projection[LABEL_LENGTH], 		Light[LABEL_LENGTH], 					Advanced[LABEL_LENGTH], 			Back[LABEL_LENGTH], 
+					HoldStart[LABEL_LENGTH], 			Shutdown[LABEL_LENGTH], 			Cancel[LABEL_LENGTH], 				Confirm[LABEL_LENGTH], 
+					WaitLoading[LABEL_LENGTH], 		Loading[LABEL_LENGTH], 				WaitShutdown[LABEL_LENGTH], 	ShuttingDown[LABEL_LENGTH]; 	//Modify as needed
+};
+
+                                           
+/************************** Variables **************************/
+
+TranslationLabels Translations[LANG_COUNT];
+            
+
+/************************** Functions **************************/
+
+FUNCTION InitializeLabels() // Modify as needed
+{
+	//ESP
+	Translations[SPANISH].Home 					= "Inicio";
+	Translations[SPANISH].Audio 				= "Audio";
+	Translations[SPANISH].Video 				= "Vídeo";
+	Translations[SPANISH].Cam						= "Cámaras";
+	Translations[SPANISH].Projection		= "Proyección";
+	Translations[SPANISH].Light					= "Iluminación";
+	Translations[SPANISH].Advanced 			= "Avanzado";
+	Translations[SPANISH].Back 					= "Atrás";
+	Translations[SPANISH].HoldStart			= "Mantener pulsado para iniciar";
+	Translations[SPANISH].Shutdown			= "Apagar";
+	Translations[SPANISH].Cancel				= "Cancelar";
+	Translations[SPANISH].Confirm				= "Confirmar";
+	Translations[SPANISH].WaitLoading		= "Por favor, espere mientras inicializa el sistema";
+	Translations[SPANISH].Loading				= "Cargando";
+	Translations[SPANISH].WaitShutdown	= "Por favor, espere mientras se apaga el sistema";
+	Translations[SPANISH].ShuttingDown	= "Apagando el sistema";
+
+	//ENG
+	Translations[ENGLISH].Home					= "Home";
+	Translations[ENGLISH].Audio					= "Audio";
+	Translations[ENGLISH].Video					= "Video";
+	Translations[ENGLISH].Cam						= "Cameras";
+	Translations[ENGLISH].Projection		= "Projection";
+	Translations[ENGLISH].Light					= "Lighting";
+	Translations[ENGLISH].Advanced			= "Advanced";
+	Translations[ENGLISH].Back					= "Back";
+	Translations[ENGLISH].HoldStart			= "Hold to start";
+	Translations[ENGLISH].Shutdown			= "Shutdown";
+	Translations[ENGLISH].Cancel				= "Cancel";
+	Translations[ENGLISH].Confirm				= "Confirm";
+	Translations[ENGLISH].WaitLoading		= "Please wait while system is initializing";
+	Translations[ENGLISH].Loading				= "Loading";
+	Translations[ENGLISH].WaitShutdown	= "Please wait while system is shutting down";
+	Translations[ENGLISH].ShuttingDown	= "Shutting down";
+
+	//DEU
+	Translations[GERMAN].Home					= "Startseite";
+	Translations[GERMAN].Audio				= "Audio";
+	Translations[GERMAN].Video				= "Video";
+	Translations[GERMAN].Cam					= "Kameras";
+	Translations[GERMAN].Projection		= "Projektion";
+	Translations[GERMAN].Light				= "Beleuchtung";
+	Translations[GERMAN].Advanced			= "Erweitert";
+	Translations[GERMAN].Back					= "Rückseite";
+	Translations[GERMAN].HoldStart		= "Zum Starten bitte Sie drücken und halten";
+	Translations[GERMAN].Shutdown			= "Ausschalten";
+	Translations[GERMAN].Cancel				= "Abbrechen";
+	Translations[GERMAN].Confirm			= "Bestätigen";
+	Translations[GERMAN].WaitLoading	= "Initialisierung des Systems, bitte warten";
+	Translations[GERMAN].Loading			= "Laden";
+	Translations[GERMAN].WaitShutdown	= "Warten während das System heruntergefahren wird";
+	Translations[GERMAN].ShuttingDown	= "Ausschalten";
+
+}
+
+FUNCTION UpdateTouchPanelLabels(INTEGER tp, INTEGER lang) //Modify as needed
+{
+	HOME$[tp] 					= Translations[lang].Home;
+	AUDIO$[tp] 					= Translations[lang].Audio;
+	VIDEO$[tp] 					= Translations[lang].Video;
+	CAM$[tp] 						= Translations[lang].Cam;
+	PROJECTION$[tp] 		= Translations[lang].Projection;
+	LIGHT$[tp]	 				= Translations[lang].Light;
+	ADVANCED$[tp] 			= Translations[lang].Advanced;
+	BACK$[tp] 					= Translations[lang].Back;
+	HOLD_START$[tp] 		= Translations[lang].HoldStart;
+	SHUTDOWN$[tp]	 			= Translations[lang].Shutdown;
+	CANCEL$[tp] 				= Translations[lang].Cancel;
+	CONFIRM$[tp] 				= Translations[lang].Confirm;
+	WAIT_LOADING$[tp] 	= Translations[lang].WaitLoading;
+	LOADING$[tp] 				= Translations[lang].Loading;
+	WAIT_SHUTDOWN$[tp] 	= Translations[lang].WaitShutdown;
+	SHUTTING_DOWN$[tp] 	= Translations[lang].ShuttingDown;
+}
+
+CHANGE LangSelection_TP 
+{
+	INTEGER panel, lang;
+	panel = GetLastModifiedArrayIndex();
+	UpdateTouchPanelLabels(panel, LangSelection_TP[panel]);
+}
+
+FUNCTION Main()
+{
+	WaitForInitializationComplete();
+	delay(1500);
+	InitializeLabels();
+}
