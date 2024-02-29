@@ -1,2 +1,5 @@
 *.lnk
 **/SPlsWork/
+Temp/
+**/Sistemas/*.zip
+**/Sistemas/*.ASV
