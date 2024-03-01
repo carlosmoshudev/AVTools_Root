@@ -1,8 +1,12 @@
-*.lnk
-**/SPlsWork/
 Temp/
+NoVersionControl/
+**/SPlsWork/
 **/Sistemas/*.zip
 **/Sistemas/*.ASV
 **/Sistemas/*.sm2
 **/Paneles/*.vtp.ASV
+**/Assets/
+*.lnk
+*.hash
 *.ush
+*.vtz
